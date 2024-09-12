@@ -1,0 +1,53 @@
+{
+  "name": "jobfinder",
+  "version": "1.0.0",
+  "description": "Job Finder ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --watch server.js",
+    "start:prod": "set NODE_ENV=production&& nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHLong678/JobFinder.git"
+  },
+  "author": "Cao Hoang Long vs Truong Dinh Hoai Nam",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.3",
+    "morgan": "^1.9.1",
+    "ndb": "^1.1.5",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.0.3",
+    "slugify": "^1.6.6",
+    "validator": "^10.11.0",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.17.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/CHLong678/JobFinder/issues"
+  },
+  "homepage": "https://github.com/CHLong678/JobFinder#readme"
+}
