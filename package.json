@@ -1,0 +1,19 @@
+{
+  "name": "jobfinder",
+  "version": "1.0.0",
+  "description": "Job Finder ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHLong678/JobFinder.git"
+  },
+  "author": "Cao Hoang Long vs Truong Dinh Hoai Nam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHLong678/JobFinder/issues"
+  },
+  "homepage": "https://github.com/CHLong678/JobFinder#readme"
+}
