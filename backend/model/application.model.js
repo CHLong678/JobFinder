@@ -6,7 +6,7 @@ const applicationSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: true,
     },
-    recruiter: {
+    recruiterId: {
       type: Schema.Types.ObjectId,
       required: true,
     },

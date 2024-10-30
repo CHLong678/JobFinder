@@ -1,13 +1,13 @@
-const { model, Schema, SchemaTypes } = require("mongoose");
+const { model, Schema } = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new Schema(
   {
     email: {
-      type: SchemaTypes.Email,
+      type: String,
+      required: [true, "Email is required"],
       unique: true,
-      lowercase: true,
-      required: true,
+      match: [/.+@.+\..+/, "Please fill a valid email address"],
     },
     password: {
       type: String,
@@ -32,14 +32,6 @@ userSchema.pre("save", async function(next) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
 });
-
-// compare password
-userSchema.methods.correctPassword = async function(
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
 
 userSchema.methods.login = function(password) {
   return new Promise((resolve, reject) => {

@@ -4,6 +4,7 @@ const recruiterSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     name: {
@@ -12,11 +13,12 @@ const recruiterSchema = new Schema(
     },
     contactNumber: {
       type: String,
+      required: true,
       validate: {
         validator: function(v) {
-          return v !== "" ? /\+\d{1,3}\d{10}/.test(v) : true;
+          return /^\+\d{1,3}[-\s]?\d{1,4}[-\s]?\d{3}[-\s]?\d{3}$/.test(v);
         },
-        message: "Phone number is invalid!",
+        message: (props) => `${props.value} is not a valid phone number!`,
       },
     },
     bio: {

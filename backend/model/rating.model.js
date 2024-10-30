@@ -23,7 +23,7 @@ const ratingSchema = new Schema(
         validator: function(v) {
           return v >= -1.0 && v <= 5.0;
         },
-        msg: "Invalid rating",
+        message: "Invalid rating",
       },
     },
   },
