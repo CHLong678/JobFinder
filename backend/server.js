@@ -5,7 +5,7 @@ const connectDB = require("./db/connectDB");
 
 process.on("uncaughtException", (err) => {
   console.log("Uncaught Exception!!! Shutting down ...");
-  console.log(err.name, err.message);
+  console.log(err.name, err.message, err.stack);
   process.exit(1);
 });
 

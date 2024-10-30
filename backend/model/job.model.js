@@ -4,6 +4,7 @@ const jobSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
+      ref: "Recruiter",
       required: true,
     },
     title: {
@@ -14,7 +15,7 @@ const jobSchema = new Schema(
       type: Number,
       validate: [
         {
-          validator: Number.Interger,
+          validator: Number.isInteger,
           message: "maxApplicants should be an integer",
         },
         {
@@ -30,13 +31,13 @@ const jobSchema = new Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "maxPostions should be an integer",
+          message: "maxPostions should be an integer",
         },
         {
           validator: function(value) {
             return value > 0;
           },
-          msg: "maxPositions should greater than 0",
+          message: "maxPositions should greater than 0",
         },
       ],
     },
@@ -46,13 +47,13 @@ const jobSchema = new Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "activeApplications should be an integer",
+          message: "activeApplications should be an integer",
         },
         {
           validator: function(value) {
             return value >= 0;
           },
-          msg: "activeApplications should greater than equal to 0",
+          message: "activeApplications should greater than equal to 0",
         },
       ],
     },
@@ -62,13 +63,13 @@ const jobSchema = new Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "acceptedCandidates should be an integer",
+          message: "acceptedCandidates should be an integer",
         },
         {
           validator: function(value) {
             return value >= 0;
           },
-          msg: "acceptedCandidates should greater than equal to 0",
+          message: "acceptedCandidates should greater than equal to 0",
         },
       ],
     },
@@ -83,13 +84,14 @@ const jobSchema = new Schema(
           validator: function(value) {
             return this.dateOfPosting < value;
           },
-          msg: "deadline should be greater than dateOfPosting",
+          message: "deadline should be greater than dateOfPosting",
         },
       ],
     },
     skillsets: [String],
     jobType: {
       type: String,
+      enum: ["Full-time", "Part-time", "Intership", "Contract"],
       required: true,
     },
     duration: {
@@ -98,7 +100,7 @@ const jobSchema = new Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "Duration should be an integer",
+          message: "Duration should be an integer",
         },
       ],
     },
@@ -107,13 +109,13 @@ const jobSchema = new Schema(
       validate: [
         {
           validator: Number.isInteger,
-          msg: "Salary should be an integer",
+          message: "Salary should be an integer",
         },
         {
           validator: function(value) {
             return value >= 0;
           },
-          msg: "Salary should be positive",
+          message: "Salary should be positive",
         },
       ],
     },
@@ -125,7 +127,7 @@ const jobSchema = new Schema(
         validator: function(v) {
           return v >= -1.0 && v <= 5.0;
         },
-        msg: "Invalid rating",
+        message: "Invalid rating",
       },
     },
   },
