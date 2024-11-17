@@ -51,6 +51,7 @@ app.use(express.static(`${__dirname}/public`));
 // ROUTES
 app.use("/auth", require("./routes/auth.route"));
 app.use("/api", require("./routes/api.route"));
+app.use("/upload", require("./routes/upload.route"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server !`, 404));

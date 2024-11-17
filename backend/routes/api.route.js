@@ -20,6 +20,8 @@ router
   .patch(jwtAuth, JobController.updateJob)
   .delete(jwtAuth, JobController.deleteJob);
 
+router.route("/search").get(JobController.searchJob);
+
 // USER ROUTES
 router.route("/user/me").get(jwtAuth, UserController.getCurrentUserDetails);
 

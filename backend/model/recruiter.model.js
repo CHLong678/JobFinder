@@ -21,6 +21,10 @@ const recruiterSchema = new Schema(
         message: (props) => `${props.value} is not a valid phone number!`,
       },
     },
+    location: {
+      type: String,
+      required: true,
+    },
     bio: {
       type: String,
     },

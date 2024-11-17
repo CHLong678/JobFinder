@@ -25,6 +25,15 @@ const userSchema = new Schema(
   }
 );
 
+userSchema.virtual("recruiter", {
+  ref: "Recruiter",
+  localField: "_id",
+  foreignField: "userId",
+  justOne: true,
+});
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
+
 //* Pre Middlewares ****************************************************************
 userSchema.pre("save", async function(next) {
   if (!this.isModified("password")) return next();

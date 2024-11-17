@@ -13,22 +13,34 @@ exports.createOne = (Model) =>
     });
   });
 
+// exports.getOne = (Model, popOptions) =>
+//   catchAsync(async (req, res, next) => {
+//     let query = Model.findById(req.params.id);
+//     if (popOptions) query = query.populate(popOptions);
+
+//     const doc = await query;
+
+//     if (!doc)
+//       return next(new AppError("No ducument were found with that id", 404));
+
+//     res.status(200).json({
+//       status: "success",
+//       data: {
+//         doc,
+//       },
+//     });
+//   });
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
-
-    const doc = await query;
-
+    const doc = await query.lean();
     if (!doc)
-      return next(new AppError("No ducument were found with that id", 404));
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        doc,
-      },
-    });
+      return next(new AppError("No document were found with that id", 404));
+    // if (doc.userId && doc.userId.recruiter) {
+    //   delete doc.userId.id;
+    // }
+    res.status(200).json({ status: "success", data: { doc } });
   });
 
 exports.updateOne = (Model) =>

@@ -1,10 +1,11 @@
 const { model, Schema } = require("mongoose");
+const slugify = require("slugify");
 
 const jobSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "Recruiter",
+      ref: "User",
       required: true,
     },
     title: {
@@ -88,10 +89,11 @@ const jobSchema = new Schema(
         },
       ],
     },
+    job_slug: String,
     skillsets: [String],
     jobType: {
       type: String,
-      enum: ["Full-time", "Part-time", "Intership", "Contract"],
+      enum: ["Full-time", "Part-time", "Internship", "Contract"],
       required: true,
     },
     duration: {
@@ -136,6 +138,13 @@ const jobSchema = new Schema(
     timestamps: true,
   }
 );
+
+jobSchema.index({ title: "text", skillsets: "text", jobType: "text" });
+
+jobSchema.pre("save", function(next) {
+  this.job_slug = slugify(this.title, { lower: true });
+  next();
+});
 
 const Job = model("Job", jobSchema);
 
