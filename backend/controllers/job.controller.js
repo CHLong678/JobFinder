@@ -63,7 +63,7 @@ const jobPopOptions = {
   populate: {
     path: "recruiter",
     model: "Recruiter",
-    select: "name contactNumber location",
+    select: "name contactNumber photo location",
   },
 };
 
@@ -128,7 +128,7 @@ const getAllJobs = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  console.log("MongoDB Query:", features.query.getQuery());
+  // console.log("MongoDB Query:", features.query.getQuery());
 
   const jobs = await features.query.populate(jobPopOptions).lean();
 
