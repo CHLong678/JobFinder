@@ -54,6 +54,8 @@ const updateUserDetails = catchAsync(async (req, res, next) => {
     name,
     contactNumber,
     bio,
+    location,
+    photo,
     education,
     skills,
     resume,
@@ -71,6 +73,8 @@ const updateUserDetails = catchAsync(async (req, res, next) => {
     if (name) userDetails.name = name;
     if (contactNumber) userDetails.contactNumber = contactNumber;
     if (bio) userDetails.bio = bio;
+    if (location) userDetails.location = location;
+    if (photo) userDetails.photo = photo;
   } else {
     userDetails = await JobApplicant.findOne({ userId: _id });
 
