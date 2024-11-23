@@ -128,8 +128,6 @@ const getAllJobs = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  // console.log("MongoDB Query:", features.query.getQuery());
-
   const jobs = await features.query.populate(jobPopOptions).lean();
 
   if (!jobs.length) {

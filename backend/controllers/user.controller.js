@@ -210,10 +210,32 @@ const getJobApplications = catchAsync(async (req, res, next) => {
   });
 });
 
+const getAllRecruiters = catchAsync(async (req, res, next) => {
+  const filter = {};
+
+  const features = new APIFeatures(Recruiter.find(filter), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const recruiters = await features.query.lean();
+
+  if (!recruiters.length) {
+    return next(new AppError("No recruiters were found", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: recruiters,
+  });
+});
+
 module.exports = {
   getCurrentUserDetails,
   getUserDetailsById,
   updateUserDetails,
   applyForJob,
   getJobApplications,
+  getAllRecruiters,
 };

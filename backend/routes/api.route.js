@@ -25,6 +25,8 @@ router.route("/search").get(JobController.searchJob);
 // USER ROUTES
 router.route("/user/me").get(jwtAuth, UserController.getCurrentUserDetails);
 
+router.route("/user").get(UserController.getAllRecruiters);
+
 router
   .route("/user/:id")
   .get(jwtAuth, UserController.getUserDetailsById)
