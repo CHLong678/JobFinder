@@ -99,6 +99,7 @@ const searchJob = catchAsync(async (req, res, next) => {
   if (rating) searchCriteria.rating = { $gte: rating };
 
   const jobs = await Job.find(searchCriteria)
+    .populate(jobPopOptions)
     .skip((page - 1) / limit)
     .limit(limit);
 
