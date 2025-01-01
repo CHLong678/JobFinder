@@ -11,12 +11,25 @@ const recruiterSchema = new Schema(
       type: String,
       required: true,
     },
+    // contactNumber: {
+    //   type: String,
+    //   required: true,
+    //   validate: {
+    //     validator: function(v) {
+    //       return /^\+\d{1,3}[-\s]?\d{1,4}[-\s]?\d{3}[-\s]?\d{3}$/.test(v);
+    //     },
+    //     message: (props) => `${props.value} is not a valid phone number!`,
+    //   },
+    // },
     contactNumber: {
       type: String,
       required: true,
       validate: {
         validator: function(v) {
-          return /^\+\d{1,3}[-\s]?\d{1,4}[-\s]?\d{3}[-\s]?\d{3}$/.test(v);
+          // Cập nhật biểu thức chính quy để chấp nhận phần mở rộng của số điện thoại
+          return /(\+\d{1,3}[-\s]?)?(\(?\d{3}\)?[-\s]?)?\d{3}[-\s]?\d{4}( x\d{1,5})?/.test(
+            v
+          );
         },
         message: (props) => `${props.value} is not a valid phone number!`,
       },
@@ -26,7 +39,6 @@ const recruiterSchema = new Schema(
     },
     location: {
       type: String,
-      required: true,
     },
     bio: {
       type: String,

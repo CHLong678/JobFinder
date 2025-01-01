@@ -12,15 +12,19 @@ const router = express.Router();
 router
   .route("/jobs")
   .post(jwtAuth, JobController.addNewJob)
-  .get(jwtAuth, JobController.getAllJobs);
+  .get(JobController.getAllJobs);
 
 router
   .route("/jobs/:id")
-  .get(jwtAuth, JobController.getJob)
+  .get(JobController.getJob)
   .patch(jwtAuth, JobController.updateJob)
   .delete(jwtAuth, JobController.deleteJob);
 
 router.route("/search").get(JobController.searchJob);
+
+router
+  .route("/recruiter/:recruiterId/jobs")
+  .get(JobController.getJobsByRecruiterId);
 
 // USER ROUTES
 router.route("/user/me").get(jwtAuth, UserController.getCurrentUserDetails);
@@ -29,7 +33,7 @@ router.route("/user").get(UserController.getAllRecruiters);
 
 router
   .route("/user/:id")
-  .get(jwtAuth, UserController.getUserDetailsById)
+  .get(UserController.getUserDetailsById)
   .patch(jwtAuth, UserController.updateUserDetails);
 
 router
@@ -47,7 +51,7 @@ router
   .put(jwtAuth, ApplicationsController.updateApplicationStatus);
 
 // APPLICANTS ROUTES
-router.route("/applicants").get(jwtAuth, ApplicantsController.getApplicants);
+router.route("/applicants").get(ApplicantsController.getApplicants);
 
 // RATING ROUTES
 router

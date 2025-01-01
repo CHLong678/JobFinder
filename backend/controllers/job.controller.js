@@ -203,6 +203,37 @@ const deleteJob = catchAsync(async (req, res, next) => {
   });
 });
 
+// To get all jobs posted by a specific recruiter (anyone can access)
+const getJobsByRecruiterId = catchAsync(async (req, res, next) => {
+  const { recruiterId } = req.params; // Lấy recruiterId từ URL params
+
+  // Kiểm tra xem recruiterId có hợp lệ hay không (có thể thêm logic để kiểm tra tính hợp lệ của ID)
+  if (!recruiterId) {
+    return next(new AppError("Recruiter ID is required", 400));
+  }
+
+  // Lọc công việc theo recruiterId
+  const filter = { userId: recruiterId };
+
+  // Áp dụng các tính năng phân trang, lọc, sắp xếp nếu cần
+  const features = new APIFeatures(Job.find(filter), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const jobs = await features.query.populate(jobPopOptions).lean();
+
+  if (!jobs.length) {
+    return next(new AppError("No jobs found for this recruiter", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: jobs,
+  });
+});
+
 module.exports = {
   addNewJob,
   searchJob,
@@ -210,4 +241,5 @@ module.exports = {
   getJob,
   updateJob,
   deleteJob,
+  getJobsByRecruiterId,
 };
